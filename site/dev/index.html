@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Mconf - Servidor de Webconferência</title>
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="bigbluebutton/demo/jquery.xml2json.js"></script>
+<script src="bigbluebutton/demo/md5.js"></script>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-21342779-3']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+<script type="text/javascript">
+function encode(string) {
+  return hex_md5(string);
+}
+
+function populateRoomList(meetings) {
+  $("#room_list").html("");
+  $("#room_list").append('<option id="room_' + encode("Demo Meeting") + '" value="Demo Meeting">Demo Meeting</option>');
+
+  if (meetings.meeting) {
+    var meetingID;
+    var meeting;
+    var encodedMeetingID;
+    for (var i in meetings.meeting) {
+      meeting = (meetings.meeting[i].attendees != null) ? meetings.meeting[i] : meetings.meeting;
+      meetingID = meeting.meetingID;
+      encodedMeeting = encode(meetingID);
+			
+      if (meeting.participantCount != "0") {
+        if ($("#room_" + encodedMeeting).length == 0) {
+          $("#room_list").append('<option id="room_' + encodedMeeting + '" value="' + meetingID + '">' + meetingID + '</option>');
+        }
+      }
+			
+      if (meeting == meetings.meeting) break;
+    }
+  }
+}
+
+
+$(document).ready(function(){
+  function getRoomList() {
+	$.ajax({
+    	type: "GET",
+		url: 'bigbluebutton/demo/demo4_helper.jsp?getxml=true',
+		dataType: "text/xml",
+		cache: false,
+		success: function(xml) {
+			meetings = $.xml2json(xml);
+			$("#alert").text("");
+			populateRoomList(meetings);
+		},
+		error: function() {
+			$("#alert").text("Failed to connect to API.");
+			populateRoomList(null);
+		}
+	});
+  }
+
+  //$("#room_list").focus(function() {
+  //  getRoomList();
+  //});
+
+  getRoomList();
+
+});
+
+</script>
+
+</head>
+
+<script type="text/javascript">
+        function autoFocus() {
+                document.getElementById("username").focus();
+        }
+</script>
+
+<body onload="autoFocus();">
+
+  <!-- Header Start -->
+  <div id="wrapper">
+    <div id="header">
+      <div id="logo">
+        <a href="http://www.inf.ufrgs.br/prav/gtmconf"><img src="images/mconf_logo.png" border="0" /></a>
+	<a id="slogan">DEV</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRAV / MCONF -->
+  <div class="noticebar">
+    <h3>Servidor de testes do PRAV - uso livre</h3>
+    GT-Mconf - BigBlueButton 0.71a versão de <u><b>desenvolvimento</b></u> (máquina virtual)
+  </div>
+  <div class="feedbackbar">
+    Favor enviar feedback para <a href="mailto:prav.mconf@inf.ufrgs.br">prav.mconf@inf.ufrgs.br</a><br />
+  </div>
+
+  <!-- Content Start -->
+  <div id="content">
+
+  <table id="table_forms"><tr><td width="50%" valign="top">
+
+    <div id="table_form_left">
+      <h2>Entrar em uma sala</h2>
+      <p>&nbsp;</p>
+      <form NAME="form1" METHOD="GET" action="/bigbluebutton/demo/demo1.jsp">
+        <div id="alert"></div>
+        <div class="field">
+	  Seu nome:<br />
+          <input type="text" id="username" name="username" size="30" />
+	</div>
+        <div class="field">
+	  Conferências em andamento:<br />
+	  <select size="1" name="room" id="room_list">
+	  </select>
+	</div>
+        <div class="field submit">
+          <input type="submit" value="Entrar"/> <br />
+	</div>
+        <input TYPE="hidden" NAME="action" VALUE="create">
+      </form>
+    </div>
+
+  </td><td width="50%" valign="top">
+
+    <div id="table_form_right">
+      <h2>Criar uma sala</h2>
+      <p>&nbsp;</p>
+      <FORM NAME="form2" METHOD="GET" action="bigbluebutton/demo/create.jsp">
+        <div class="field">
+          Seu nome: <br />
+	  <input type="text" name="username1" size="20" /><br>
+        </div>
+        <div class="field">
+          Nome da sala: <br />
+	  <input type="text" name="roomname" size="20" />
+        </div>
+        <div class="field submit">
+	  <input id="submit-button" type="submit" value="Criar sala" /><br />
+	</div>
+        <INPUT TYPE="hidden" NAME="action" VALUE="create"> <br />
+      </FORM>
+    </div>
+  </td></tr></table>
+
+  <div style="width: 700px; margin: auto; margin-top: 30px;">
+        <p class="content"></p>
+        <img src="images/arrow.png" width="15" height="17" border="0" />
+        <div style="margin-top:-17px; margin-left:20px"><a href="/bigbluebutton/demo/demo1.jsp">Mais opções...</a></div>
+  </div>
+
+    <!-- PRAV / MCONF -->
+    <div class="changesbar">
+      <p>Este servidor utiliza uma versão do BigBlueButton modificada para o Mconf.</p>
+      <p>O código e a lista de mudanças podem ser encontrados em: <a href="https://github.com/mconf/bigbluebutton">https://github.com/mconf/bigbluebutton</a></p>
+    </div>
+
+   <div id="sponsors">
+    <ul>
+      <li>
+        <a href="http://www.rnp.br"> <img src="images/rnp_logo.jpg" width="100" height="53" border="0" /> </a>
+      </li>
+      <li>
+        <a href="http://www.inf.ufrgs.br/prav"> <img src="images/prav_logo.png" width="91" height="45" border="0" /> </a>
+      </li>
+      <li>
+        <a href="http://www.bigbluebutton.org" target="_blank"> <img src="images/bbb_logo.png" width="182" height="44" border="0" /></a>
+        <!--<div id="slogan"><h3>Demo Server</h3></div>-->
+      </li>
+    </ul>
+    <div style="clear:both;"></div>
+  </div>
+
+
+    </div>
+    <!-- Content End -->
+
+
+    <!-- Footer Start -->
+    <div id="footer" style="text-align:center; margin-top: 30px;">
+	<p>Site do projeto Mconf: <a href="http://www.inf.ufrgs.br/prav/gtmconf">http://www.inf.ufrgs.br/prav/gtmconf</a></p>
+        <p>BigBlueButton: Copyright © 2010 <a href="http://bigbluebutton.org/">BigBlueButton Inc.</a></p>
+    </div>
+    <!-- Footer End -->
+
+  </body>
+</html>
+
