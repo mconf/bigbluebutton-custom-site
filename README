@@ -1,2 +1,20 @@
 These are the customized BigBlueButton HTML and JSP demo files used by Mconf (https://github.com/mconf/).
 
+=== /bigbluebutton-web/web-app/demo
+
+Contains the demo JSP pages that should be copied to <tt>/var/lib/tomcat6/webapps/bigbluebutton/demo/</tt>
+
+=== /site
+
+Contains the index.html, images and stylesheets that in the BBB server are located in <tt>/var/www/bigbluebutton-default/</tt>.
+
+==== /dev
+
+Files for the development server (mconfdev.inf.ufrgs.br).
+
+==== /stable
+
+Files for the stable server (mconf.inf.ufrgs.br).
+
+
+
