@@ -20,6 +20,8 @@ Author: Fred Dixon <ffdixon@bigbluebutton.org>
   
 -->
 
+<%@ include file="detectmobilebrowser.jsp"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <% 
@@ -99,17 +101,22 @@ $(document).ready(function(){
 		//
 
 		String username = request.getParameter("username1");
-		String meetingID = username + "'s meeting";
-
-		String meeting_ID = "";
+		
+		String meetingID = request.getParameter("roomname");
+		if (meetingID == null || meetingID == "") {
+		    meetingID = username + "'s meeting";
+		}
 
 		//
 		// This is the URL for to join the meeting as moderator
 		//
 		String joinURL = getJoinURL(username, meetingID, "<br>Welcome to %%CONFNAME%%.<br>");
+                if (mobile) {
+                    joinURL = joinURL.replace("http://", "bigbluebutton://");
+                }
 
-		
 		String inviteURL = BigBlueButtonURL	+ "demo/create.jsp?action=invite&meetingID=" + URLEncoder.encode(meetingID, "UTF-8");
+
 %>
 
 <hr />
@@ -123,7 +130,7 @@ $(document).ready(function(){
 	<tbody>
 		<tr>
 			<td width="50%">
-			<center><strong> <%=username%>'s meeting</strong> has been
+			<center><strong> <%=meetingID%></strong> has been
 			created.</center>
 			</td>
 
@@ -132,9 +139,7 @@ $(document).ready(function(){
 
 			Step 2. Invite others using the following <a href="<%=inviteURL%>">link</a> (shown below):
 			<form name="form2" method="POST">
-				<textarea cols="62" rows="5" name="myname" style="overflow: hidden">
-					<%=inviteURL%>
-				</textarea>
+				<textarea cols="62" rows="5" name="myname" style="overflow: hidden"><%=inviteURL%></textarea>
 			</form>
 			<p>&nbsp;
 			<p />Step 3. Click the following link to start your meeting:
@@ -170,6 +175,8 @@ $(document).ready(function(){
 			//
 			// The meeting has started -- bring the user into the meeting.
 			//
+
+
 %>
 <script type="text/javascript">
 	window.location = "<%=enterURL%>";
@@ -278,6 +285,10 @@ function mycallback() {
 		String joinURL = getJoinURLViewer(request.getParameter("username"), request.getParameter("meetingID"));
 			
 		if (joinURL.startsWith("http://")) {
+                    if (mobile) {
+                        joinURL = joinURL.replace("http://", "bigbluebutton://");
+                    }
+
 %>
 
 <script language="javascript" type="text/javascript">

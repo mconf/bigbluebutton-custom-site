@@ -20,6 +20,8 @@ Author: Fred Dixon <ffdixon@bigbluebutton.org>
 
 -->
 
+<%@ include file="detectmobilebrowser.jsp"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <% 
@@ -82,17 +84,17 @@ if (request.getParameterMap().isEmpty()) {
 <%
 } else  if (request.getParameter("action").equals("create")) {
 	
-	//
-	// Got an action=create
-	//
-	
-	//
-    // Request a URL to join a meeting called "Demo Meeting"
+    // Request a URL to join a meeting called parameter("room")
     // Pass null for welcome message to use the default message (see defaultWelcomeMessage in bigbluebutton.properties)
     //
-	String joinURL = getJoinURL(request.getParameter("username"), "Demo Meeting", null );
+    String joinURL = getJoinURL(request.getParameter("username"), request.getParameter("room"), null );
 
-	if (joinURL.startsWith("http://")) { 
+    if (joinURL.startsWith("http://")) { 
+
+      if (mobile) {
+        joinURL = joinURL.replace("http://", "bigbluebutton://");
+      }
+        
 %>
 
 <script language="javascript" type="text/javascript">

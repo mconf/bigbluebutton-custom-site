@@ -19,6 +19,9 @@ with BigBlueButton; if not, If not, see <http://www.gnu.org/licenses/>.
 Author: Fred Dixon <ffdixon@bigbluebutton.org>
 
 -->
+
+<%@ include file="detectmobilebrowser.jsp"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <% 
@@ -109,6 +112,10 @@ Author: Fred Dixon <ffdixon@bigbluebutton.org>
 		String joinURL = getJoinURL(username, meetingID, "<br>Welcome to course: %%CONFNAME%%.<br>" );
 
 		if (joinURL.startsWith("http://")) {
+                    if (mobile) {
+                        joinURL = joinURL.replace("http://", "bigbluebutton://");
+                    }
+
 %>
 
 <script language="javascript" type="text/javascript">
