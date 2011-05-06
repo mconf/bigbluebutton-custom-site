@@ -110,12 +110,14 @@ Author: Fred Dixon <ffdixon@bigbluebutton.org>
 
 		// String joinURL = getJoinURL(username, meetingID, "Welcome to " + meetingID );
 		String joinURL = getJoinURL(username, meetingID, "<br>Welcome to course: %%CONFNAME%%.<br>" );
-
-		if (joinURL.startsWith("http://")) {
+                if (joinURL.startsWith("http://")) { 
                     if (mobile) {
-                        joinURL = joinURL.replace("http://", "bigbluebutton://");
-                    }
+%>
 
+  <%= mobileRedirect(joinURL) %>
+
+<%
+                    } else {
 %>
 
 <script language="javascript" type="text/javascript">
@@ -123,7 +125,8 @@ Author: Fred Dixon <ffdixon@bigbluebutton.org>
 </script>
 
 <%
-	} else {
+      }
+    } else { // !"http://"
 %>
 
 Error: getJoinURL() failed

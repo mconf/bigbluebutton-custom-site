@@ -277,11 +277,15 @@ Error: createMeeting() failed
 		// We've got a valid meeting_ID and passoword -- let's join!
 		//
 		
-		String joinURL = getJoinMeetingURL(username, meeting_ID, password);			
+		String joinURL = getJoinMeetingURL(username, meeting_ID, password);
+                if (joinURL.startsWith("http://")) { 
                     if (mobile) {
-                        joinURL = joinURL.replace("http://", "bigbluebutton://");
-                    }
+%>
 
+  <%= mobileRedirect(joinURL) %>
+
+<%
+                    } else {
 %>
 
 <script language="javascript" type="text/javascript">
@@ -289,7 +293,9 @@ Error: createMeeting() failed
 </script>
 
 <%
-	} 
+                  }
+              } 
+    }
 %>
  
 <%@ include file="demo_footer.jsp"%>

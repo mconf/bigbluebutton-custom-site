@@ -87,14 +87,21 @@ if (request.getParameterMap().isEmpty()) {
     // Request a URL to join a meeting called parameter("room")
     // Pass null for welcome message to use the default message (see defaultWelcomeMessage in bigbluebutton.properties)
     //
-    String joinURL = getJoinURL(request.getParameter("username"), request.getParameter("room"), null );
 
+    String room = request.getParameter("room");
+    if (room == null) {
+       room = "Demo Meeting";
+    }
+
+    String joinURL = getJoinURL(request.getParameter("username"), room, null );
     if (joinURL.startsWith("http://")) { 
+        if (mobile) {
+%>
 
-      if (mobile) {
-        joinURL = joinURL.replace("http://", "bigbluebutton://");
-      }
-        
+  <%= mobileRedirect(joinURL) %>
+
+<%
+        } else {
 %>
 
 <script language="javascript" type="text/javascript">
@@ -102,7 +109,8 @@ if (request.getParameterMap().isEmpty()) {
 </script>
 
 <%
-	} else {
+      }
+    } else { // !"http://"
 %>
 
 Error: getJoinURL() failed
@@ -110,7 +118,7 @@ Error: getJoinURL() failed
 <%=joinURL %>
 
 <% 
-	}
+    }
 } 
 %>
 

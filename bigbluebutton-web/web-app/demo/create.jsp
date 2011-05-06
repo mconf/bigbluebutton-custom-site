@@ -111,6 +111,7 @@ $(document).ready(function(){
 		// This is the URL for to join the meeting as moderator
 		//
 		String joinURL = getJoinURL(username, meetingID, "<br>Welcome to %%CONFNAME%%.<br>");
+
                 if (mobile) {
                     joinURL = joinURL.replace("http://", "bigbluebutton://");
                 }
@@ -283,12 +284,14 @@ function mycallback() {
 		// We don't need to pass a meeting descritpion as it's already been set by the first time 
 		// the meeting was created.
 		String joinURL = getJoinURLViewer(request.getParameter("username"), request.getParameter("meetingID"));
-			
 		if (joinURL.startsWith("http://")) {
                     if (mobile) {
-                        joinURL = joinURL.replace("http://", "bigbluebutton://");
-                    }
+%>
 
+  <%= mobileRedirect(joinURL) %>
+
+<%
+                    } else {
 %>
 
 <script language="javascript" type="text/javascript">
@@ -296,6 +299,7 @@ function mycallback() {
 </script>
 
 <%
+          }
 	} else { 
 %>
 
