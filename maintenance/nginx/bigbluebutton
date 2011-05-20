@@ -4,6 +4,10 @@ server {
 
      access_log  /var/log/nginx/bigbluebutton.access.log;
 
+     if (-f /var/www/bigbluebutton-default/maintenance.html) {
+         rewrite ^(.*)$ /maintenance.html break;
+     }
+
          # Handle RTMPT (RTMP Tunneling).  Forwards requests
          # to Red5 on port 8088.
       location ~ (/open/|/close/|/idle/|/send/) {

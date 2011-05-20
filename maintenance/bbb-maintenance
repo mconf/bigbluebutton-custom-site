@@ -1,0 +1,38 @@
+#!/bin/bash
+
+FILES_ROOT=/var/www/bigbluebutton-default/
+
+usage() {
+    echo "BigBlueButton server maintenance utility"
+    echo "Enables and disables maintenance mode for BigBlueButton"
+    echo
+    echo "   bbb-maintenance --[on|off]"
+    echo
+}
+
+enable_maintenance() {
+    echo "Enabling maintenance mode"
+    now=$(date)
+    sudo sed 's/\$\$TIME\$\$/'"$now"'/' <"$FILES_ROOT/maintenance.html.template" >"$FILES_ROOT/maintenance.html"
+    echo "Maintenance ON since "$now
+}
+
+disable_maintenance() {
+    echo "Disabling maintenance mode"
+    sudo rm "$FILES_ROOT/maintenance.html"
+    echo "Maintenance OFF since "$now
+}
+
+if [ $# -le 0 ]; then
+    usage
+    exit 0
+fi
+
+if [ "$1" = "-on" -o "$1" = "--on" ]; then
+    enable_maintenance
+fi
+
+if [ "$1" = "-off" -o "$1" = "--off" ]; then
+    disable_maintenance
+fi
+
