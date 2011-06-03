@@ -21,7 +21,11 @@ There's also a script to easily enable and disable maintenance mode.
 
 * `maintenance.html.template` is the template used to generate `maintenance.html`. Put it in the document root, usually `/var/www/bigbluebutton-default/`.
 
-* `bbb-maintenance` is a script that enables or disables the maintenance mode by creating or removing `maintenance.html`. Put it with `bbb-conf`, usually at `/usr/local/bin/`.
+* `bbb-maintenance` is a script that enables or disables the maintenance mode by creating or removing `maintenance.html`. Put it with `bbb-conf`, usually at `/usr/local/bin/`. Don't forget to give it permsision to be executed:
+
+    ```
+    sudo chmod +x /usr/local/bin/bbb-maintenance
+    ```
 
     Usage:
 
