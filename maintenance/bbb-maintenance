@@ -20,7 +20,7 @@ enable_maintenance() {
 disable_maintenance() {
     echo "Disabling maintenance mode"
     sudo rm "$FILES_ROOT/maintenance.html"
-    echo "Maintenance OFF since "$now
+    echo "Maintenance OFF"
 }
 
 if [ $# -le 0 ]; then

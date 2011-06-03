@@ -1,11 +1,15 @@
 Maintenance mode for BigBlueButton
 ==================================
 
-### How it works:
+### What's this?
 
-You set a rewrite rule in Nginx that searchs for a file named `maintenance.html` in the document root (usually `/var/www/bigbluebutton-default/`). If it exists, *all* BigBlueButton pages will be disabled (home page, API, demos, etc.) and Nginx will render only `maintenance.html`.
+You set a rewrite rule in Nginx that searchs for a file named `maintenance.html` in the document root (usually `/var/www/bigbluebutton-default/`). If it exists, *all* BigBlueButton pages will be disabled (home page, API, demos, etc.) and Nginx will render only `maintenance.html`. There's also a script to easily enable and disable maintenance mode.
 
-There's also a script to easily enable and disable maintenance mode.
+This idea and the HTML file were taken from [Capistrano](https://github.com/capistrano/capistrano/). See also:
+
+* http://craigjolicoeur.com/blog/getting-capistranos-webdisable-to-work-with-nginx
+* http://www.ruby-forum.com/topic/113740#594606
+
 
 ### Files
 
