@@ -133,7 +133,7 @@ public String getJoinMeetingURL(String username, String meetingID, String passwo
 
 
 
-public String wrnpJoinURL(String username, String meetingID, String record, String welcome, Map<String, String> metadata, String xml, String moderatorPW, String attendeePW, boo$
+public String wrnpJoinURL(String username, String meetingID, String record, String welcome, Map<String, String> metadata, String xml, String moderatorPW, String attendeePW, boolean userMod) {
   String base_url_create = BigBlueButtonURL + "api/create?";
   String base_url_join = BigBlueButtonURL + "api/join?";
 

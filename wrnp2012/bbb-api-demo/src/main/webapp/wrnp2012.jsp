@@ -4,18 +4,23 @@
   request.setCharacterEncoding("UTF-8"); 
   response.setCharacterEncoding("UTF-8"); 
 
-  String roomName = "WRNP-2012";
+  //
+  // CONFIGURATIONS
+  //
+  String meetingID = "WRNP-2012";
   String moderatorPW = "CHANGE-ME";
   String attendeePW = "CHANGE-ME-TOO";
-  boolean userIsMod = false;
   Integer maxUsers = 100;
 
+
+  boolean userIsMod = false;
   boolean userValid = false;
 
+  // calls getMeetingInfo to get the number of users in the meeting
   Integer usersNow = 0;
   Document doc = null;
   try {
-    String data = getMeetingInfo(roomName, moderatorPW);
+    String data = getMeetingInfo(meetingID, moderatorPW);
     doc = parseXml(data);
      if (doc.getElementsByTagName("returncode").item(0).getTextContent().trim().equals("SUCCESS")) {
        String tmp = doc.getElementsByTagName("participantCount").item(0).getTextContent().trim();
@@ -24,6 +29,20 @@
   } catch (Exception e) {
     e.printStackTrace();
   }
+
+  // gets the user role and sets userValid if everything is ok
+  String role = request.getParameter("role");
+  if (role.equals("moderator")) {
+    String password = request.getParameter("password");
+    if (password.equals(moderatorPW)) {
+      userIsMod = true;
+      userValid = true;
+    }
+  } else {
+    userIsMod = false;
+    userValid = true;
+  }
+
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -50,34 +69,48 @@
   </div>
 </div>
 
-<div id="main"><div id="main_content">
+<div id="main"><div id="main_content" class="container">
 
 <%
-  if (usersNow >= maxUsers) {
+  if (usersNow >= maxUsers && !userIsMod) {
 %>
 
-Desculpe, o sistema alcançou o número máximo de usuários. Tente novamente mais tarde.
+<div class="alert alert-warning">
+  Desculpe, o sistema alcançou o número máximo de usuários. Tente novamente mais tarde.
+</div>
+<a href="/">Voltar...</a>
+
 
 <%
-  } else if (request.getParameter("action").equals("create")) {
-    String url = BigBlueButtonURL.replace("bigbluebutton/","demo/");
-    // String preUploadPDF = "<?xml version='1.0' encoding='UTF-8'?><modules><module name='presentation'><document url='"+url+"pdfs/sample.pdf'/></module></modules>";
+  // user invalid == wrong moderator password
+  } else if (!userValid) {
+%>
 
-    String role = request.getParameter("role");
-    if (role.equals("moderator")) {
-      String password = request.getParameter("password");
-      if (password.equals(moderatorPW)) {
-        userIsMod = true;
-        userValid = true;
+<div class="alert alert-error">
+  Senha de moderador inválida.
+</div>
+<a href="/">Voltar...</a>
+
+<%
+  } else {
+
+    // don't let a normal user create the room
+    if (!userIsMod) {
+      if (!isMeetingRunning(meetingID).equals("true")) {
+%>
+
+<div class="alert alert-warning">
+  A sessão ainda não foi iniciada. Por favor espere o moderador iniciar a sessão e tente novamente.
+</div>
+<a href="/">Voltar...</a>
+
+<%
+        return;
       }
-    } else {
-      userIsMod = false;
-      userValid = true;
     }
 
-    if (userValid) {
-      String joinURL = wrnpJoinURL(request.getParameter("username"), roomName, "true", null, null, null, moderatorPW, attendeePW, userIsMod);
-      if (joinURL.startsWith("http://")) { 
+    String joinURL = wrnpJoinURL(request.getParameter("username"), meetingID, "true", null, null, null, moderatorPW, attendeePW, userIsMod);
+    if (joinURL.startsWith("http://")) { 
 %>
 
 <div class="alert alert-success">
@@ -88,7 +121,7 @@ Desculpe, o sistema alcançou o número máximo de usuários. Tente novamente ma
 </script>
 
 <%
-      } else {
+    } else { // wrong url
 %>
 
 <div class="alert alert-error">
@@ -97,16 +130,6 @@ Desculpe, o sistema alcançou o número máximo de usuários. Tente novamente ma
 <a href="/">Voltar...</a>
 
 <% 
-      }
-    }  else {
-%>
-
-<div class="alert alert-error">
-  Senha de moderador inválida.
-</div>
-<a href="/">Voltar...</a>
-
-<%
     }
   }
 %>
