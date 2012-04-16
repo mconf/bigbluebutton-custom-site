@@ -150,7 +150,7 @@ public String getJoinMeetingURL(String username, String meetingID, String passwo
 //
 //  Note this meeting will use username for meetingID
 
-public String getJoinURL(String username, String meetingID, String record, String welcome, Map<String, String> metadata, String xml, String moderatorPW, String attendeePW, boolean userMod) {
+public String getJoinURL(String username, String meetingID, String record, String welcome, Map<String, String> metadata, String xml) {
 	String base_url_create = BigBlueButtonURL + "api/create?";
 	String base_url_join = BigBlueButtonURL + "api/join?";
 
@@ -183,8 +183,7 @@ public String getJoinURL(String username, String meetingID, String record, Strin
 
 	String create_parameters = "name=" + urlEncode(meetingID)
 		+ "&meetingID=" + urlEncode(meetingID) + welcome_param + voiceBridge_param
-        + "&attendeePW=" + attendeePW
-        + "&moderatorPW=" + moderatorPW
+		+ "&attendeePW=ap&moderatorPW=mp"
 		+ "&record=" + record + getMetaData( metadata );
 
 
@@ -205,14 +204,9 @@ public String getJoinURL(String username, String meetingID, String record, Strin
 		//
 		// Looks good, now return a URL to join that meeting
 		//  
-        String password;
-        if (userMod) {
-            password = moderatorPW;
-        } else {
-            password = attendeePW;
-        }
+
 		String join_parameters = "meetingID=" + urlEncode(meetingID)
-			+ "&fullName=" + urlEncode(username) + "&password=" + password;
+			+ "&fullName=" + urlEncode(username) + "&password=mp";
 
 		return base_url_join + join_parameters + "&checksum="
 			+ checksum("join" + join_parameters + salt);
