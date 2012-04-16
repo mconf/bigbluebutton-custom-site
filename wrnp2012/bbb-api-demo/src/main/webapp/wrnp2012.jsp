@@ -8,8 +8,22 @@
   String moderatorPW = "CHANGE-ME";
   String attendeePW = "CHANGE-ME-TOO";
   boolean userIsMod = false;
+  Integer maxUsers = 100;
 
   boolean userValid = false;
+
+  Integer usersNow = 0;
+  Document doc = null;
+  try {
+    String data = getMeetingInfo(roomName, moderatorPW);
+    doc = parseXml(data);
+     if (doc.getElementsByTagName("returncode").item(0).getTextContent().trim().equals("SUCCESS")) {
+       String tmp = doc.getElementsByTagName("participantCount").item(0).getTextContent().trim();
+       usersNow = Integer.parseInt(tmp);
+    }
+  } catch (Exception e) {
+    e.printStackTrace();
+  }
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -39,7 +53,13 @@
 <div id="main"><div id="main_content">
 
 <%
-  if (request.getParameter("action").equals("create")) {
+  if (usersNow >= maxUsers) {
+%>
+
+Desculpe, o sistema alcançou o número máximo de usuários. Tente novamente mais tarde.
+
+<%
+  } else if (request.getParameter("action").equals("create")) {
     String url = BigBlueButtonURL.replace("bigbluebutton/","demo/");
     // String preUploadPDF = "<?xml version='1.0' encoding='UTF-8'?><modules><module name='presentation'><document url='"+url+"pdfs/sample.pdf'/></module></modules>";
 
@@ -56,14 +76,13 @@
     }
 
     if (userValid) {
-      String joinURL = getJoinURL(request.getParameter("username"), roomName, "false", null, null, null, moderatorPW, attendeePW, userIsMod);
+      String joinURL = wrnpJoinURL(request.getParameter("username"), roomName, "true", null, null, null, moderatorPW, attendeePW, userIsMod);
       if (joinURL.startsWith("http://")) { 
 %>
 
 <div class="alert alert-success">
   Se você não for redirecionado, <a href="<%=joinURL%>">clique aqui</a> para entrar.
 </div>
-
 <script language="javascript" type="text/javascript">
   window.location.href="<%=joinURL%>";
 </script>
