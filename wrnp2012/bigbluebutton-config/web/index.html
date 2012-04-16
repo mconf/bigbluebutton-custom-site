@@ -29,7 +29,7 @@
 
 <!-- Content Start -->
 <div id="main">
-  <div id="main_content">
+  <div id="main_content" class="clearfix">
 
     <div class="subtitle">
       WRNP 2012
@@ -42,7 +42,7 @@
       <p class="content">  It supports sharing of slides (PDF and PPT), video, whiteboard, chat, voice over IP (using FreeSWITCH), and desktops.  It can record and playback sessions (slides, audio, and chat).  It runs on Mac, Unix, and PC computers, and it is supported by a <a href="http://bigbluebutton.org/support" title="BigBlueButton Support">community of developers</a> that care about good design and a streamlined user experience. </a>
     </div>
     <div id="join">
-      <h2>Acesse a transmissão ao vivo</h2>
+      <h2>Acesse a transmissão ao vivo:</h2>
       <form id="form-join" NAME="form1" METHOD="GET" onSubmit="return checkform(this);" action="/demo/wrnp2012.jsp">
         <label for="username">Seu nome:</label>
         <input type="text" id="username" required="required" autofocus="autofocus" name="username" />
@@ -54,9 +54,18 @@
         <label></label>
         <input type="password" id="password" name="password" placeholder="Digite a senha" />
         <label></label>
-        <input type="submit" value="Entrar" class="btn" /> <br />
+        <input type="submit" value="Entrar" class="btn" />
         <input TYPE="hidden" NAME="action" VALUE="create">
       </form>
+    </div>
+
+    <div id="recordings">
+      <h2>Assista as gravações:</h2>
+      Não há gravações disponíveis no momento.
+      <!--<ul>
+        <li><a href="#">Dia 02/05/2012: Sessão manhã</a></li>
+        <li><a href="#">Dia 02/05/2012: Sessão tarde</a></li>
+      </ul>-->
     </div>
 
   </div>
