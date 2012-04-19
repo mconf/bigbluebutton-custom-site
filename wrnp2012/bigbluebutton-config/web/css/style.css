@@ -92,12 +92,13 @@ html[xmlns] .clearfix {
 }
 
 #welcome {
+  text-align: justify;
   margin-bottom: 30px;
 }
 
 #about {
   clear: both;
-  text-align: center;
+  text-align: justify;
   margin-bottom: 20px;
 }
 
