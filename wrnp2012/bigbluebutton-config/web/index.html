@@ -22,6 +22,9 @@
       <div class="pull-left">
         <a class="brand" href="http://mconf.org">Mconf.org</a>
       </div>
+      <div class="pull-right">
+        <span class="brand">WRNP 2012</span>
+      </div>
     </div>
   </div>
 </div>
@@ -32,23 +35,24 @@
   <div id="main_content" class="clearfix">
 
     <div class="title">
-      WRNP 2012
+      <span>Transmissão do WRNP 2012</span>
     </div>
-    <div class="subtitle">
+    <div class="subtitle"><span>
       XIII Workshop da Rede Nacional de Ensino e Pesquisa (WRNP)
-    </div>
+    </span></div>
 
     <img class="divider" src="images/divider.png"/>
 
     <div id="welcome">
       <p class="content">
-        O Workshop da <a href="http://www.rnp.br/">RNP (Rede Nacional de Ensino e Pesquisa)</a> de 2012 acontece de 30 de abril à 3 de maio em Ouro Preto (MG), durante o <a href="http://sbrc2012.dcc.ufmg.br/xiii-workshop-da-rede-nacional-de-ensino-e-pesquisa-wrnp?m=1004">SBRC 2012</a>.
-      </p>
-      <p class="content">
+        O <a href="http://wrnp.rnp.br/">WRNP</a> (Workshop da <a href="http://www.rnp.br/">Rede Nacional de Ensino e Pesquisa)</a> de 2012 acontece de 30 de abril à 1 de maio em Ouro Preto (MG), durante o <a href="http://sbrc2012.dcc.ufmg.br/xiii-workshop-da-rede-nacional-de-ensino-e-pesquisa-wrnp?m=1004">SBRC 2012</a>.
         Nesta página você pode acessar a transmissão ao vivo do evento e também as gravações realizadas, ambos através do sistema </a href="mconf.org">Mconf</a>.
       </p>
     </div>
-    <div id="join">
+
+    <div class="clearfix">
+
+    <div id="join" class="clearfix">
       <h2>Acesse a transmissão ao vivo:</h2>
       <form id="form-join" NAME="form1" METHOD="GET" onSubmit="return checkform(this);" action="/demo/wrnp2012.jsp">
         <label for="username">Seu nome:</label>
@@ -65,13 +69,31 @@
       </form>
     </div>
 
-    <div id="recordings">
+    <div id="recordings" class="clearfix">
       <h2>Assista às gravações:</h2>
       Não há gravações disponíveis no momento.
       <!--<ul>
         <li><a href="#">Dia 02/05/2012: Sessão manhã</a></li>
         <li><a href="#">Dia 02/05/2012: Sessão tarde</a></li>
       </ul>-->
+    </div>
+
+    </div>
+
+    <div id="about">
+      <p class="content">
+        Esta é uma transmissão experimental realizada no contexto do projeto do GT-MCONF2 - Multiconferência WEB e dispositivos móveis. Para esta transmissão, há um limite no número de usuários que podem assistir simultaneamente, para evitar sobrecarga do servidor alocado para o evento.
+      </p>
+      <p class="content">
+        O sistema desenvolvido pelo GT permite escalabilidade para múltiplos servidores com balanceamento de carga. Espera-se que no final do desenvolvimento do projeto o sistema suporte centenas ou milhares de usuários simultaneamente, bastando adequar o número de servidores, que podem ser físicos ou virtualizados (“na nuvem”).
+      </p>
+      <p class="content">
+        A equipe deste GT atua de maneira colaborativa com o grupo do BigBlueButton, que desenvolveu o software base de webconferência.
+      </p>
+      <p class="content">
+        O GT-MCONF é um projeto de Fase 2 parte do Programa de GTs da RNP 2011-2012.
+        Para mais informações sobre o GT, acesse: <a href="www.inf.ufrgs.br/prav/gtmconf">www.inf.ufrgs.br/prav/gtmconf</a> e <a href="http://mconf.org">http://mconf.org</a>.
+      </p>
     </div>
 
   </div>
