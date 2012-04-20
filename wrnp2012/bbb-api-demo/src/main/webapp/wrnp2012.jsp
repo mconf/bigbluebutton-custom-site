@@ -130,8 +130,11 @@
       }
 %>
 
+Se você não for redirecionado, <a href="<%=joinURL%>">clique aqui</a> para entrar.
+<br/>
+<br/>
 <div class="alert alert-success">
-  Se você não for redirecionado, <a href="<%=joinURL%>">clique aqui</a> para entrar.
+  Você já participou da transmissão do WRNP 2012? <a href="https://docs.google.com/spreadsheet/viewform?formkey=dDRSYUFBUmZocEtscnhkUzB6VzNNVkE6MA#gid=0">Clique aqui</a> para avaliar a experiência de ter acompanhando a transmissão via Mconf.
 </div>
 <script language="javascript" type="text/javascript">
   window.location.href="<%=joinURL%>";
