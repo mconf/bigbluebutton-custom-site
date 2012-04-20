@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<% 
-  request.setCharacterEncoding("UTF-8"); 
-  response.setCharacterEncoding("UTF-8"); 
+  pageEncoding="UTF-8"%>
+<%
+  request.setCharacterEncoding("UTF-8");
+  response.setCharacterEncoding("UTF-8");
 
   //
   // CONFIGURATIONS
@@ -11,7 +11,7 @@
   String moderatorPW = "CHANGE-ME";
   String attendeePW = "CHANGE-ME-TOO";
   Integer maxUsers = 100;
-
+  String logoutURL = "https://docs.google.com/spreadsheet/viewform?formkey=dDRSYUFBUmZocEtscnhkUzB6VzNNVkE6MA#gid=0";
 
   boolean userIsMod = false;
   boolean userValid = false;
@@ -109,8 +109,10 @@
       }
     }
 
-    String joinURL = wrnpJoinURL(request.getParameter("username"), meetingID, "true", null, null, null, moderatorPW, attendeePW, userIsMod);
-    if (joinURL.startsWith("http://")) { 
+    String joinURL = wrnpJoinURL(request.getParameter("username"), meetingID,
+                                 "true", null, null, null, moderatorPW, attendeePW,
+                                 userIsMod, logoutURL);
+    if (joinURL.startsWith("http://")) {
 %>
 
 <div class="alert alert-success">
@@ -129,7 +131,7 @@
 </div>
 <a href="/">Voltar...</a>
 
-<% 
+<%
     }
   }
 %>
