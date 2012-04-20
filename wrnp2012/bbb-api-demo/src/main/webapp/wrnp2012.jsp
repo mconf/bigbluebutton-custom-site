@@ -109,8 +109,9 @@
       }
     }
 
+    String welcomeMsg = "Esta é uma transmissão experimental realizada no contexto do projeto GT-MCONF2 - Multiconferência WEB e dispositivos móveis.<br><br>A gravação dessa sessão (áudio + bate-papo + apresentação) estará disponível posteriormente em <a href=\"event:http://wrnp2012.mconf.org\"><u>wrnp2012.mconf.org</u></a>.";
     String joinURL = wrnpJoinURL(request.getParameter("username"), meetingID,
-                                 "true", null, null, null, moderatorPW, attendeePW,
+                                 "true", welcomeMsg, null, null, moderatorPW, attendeePW,
                                  userIsMod, logoutURL);
     if (joinURL.startsWith("http://")) {
 %>
