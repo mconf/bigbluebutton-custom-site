@@ -12,6 +12,7 @@
   String attendeePW = "CHANGE-ME-TOO";
   Integer maxUsers = 100;
   String logoutURL = "https://docs.google.com/spreadsheet/viewform?formkey=dDRSYUFBUmZocEtscnhkUzB6VzNNVkE6MA#gid=0";
+  String welcomeMsg = "Esta é uma transmissão experimental realizada no contexto do projeto GT-MCONF2 - Multiconferência WEB e dispositivos móveis.<br><br>A gravação dessa sessão (áudio + bate-papo + apresentação) estará disponível posteriormente em <a href=\"event:http://wrnp2012.mconf.org\"><u>wrnp2012.mconf.org</u></a>.";
 
   boolean userIsMod = false;
   boolean userValid = false;
@@ -92,6 +93,16 @@
 <a href="/">Voltar...</a>
 
 <%
+  // user invalid == wrong moderator password
+  } else if (request.getParameter("username").trim() == "") {
+%>
+
+<div class="alert alert-error">
+  Você precisa especificar o seu nome para entrar na sessão.
+</div>
+<a href="/">Voltar...</a>
+
+<%
   } else {
 
     // don't let a normal user create the room
@@ -109,11 +120,14 @@
       }
     }
 
-    String welcomeMsg = "Esta é uma transmissão experimental realizada no contexto do projeto GT-MCONF2 - Multiconferência WEB e dispositivos móveis.<br><br>A gravação dessa sessão (áudio + bate-papo + apresentação) estará disponível posteriormente em <a href=\"event:http://wrnp2012.mconf.org\"><u>wrnp2012.mconf.org</u></a>.";
     String joinURL = wrnpJoinURL(request.getParameter("username"), meetingID,
                                  "true", welcomeMsg, null, null, moderatorPW, attendeePW,
                                  userIsMod, logoutURL);
     if (joinURL.startsWith("http://")) {
+
+      if (request.getParameter("mobile").equals("1")) {
+        joinURL = joinURL.replace("http://", "bigbluebutton://");
+      }
 %>
 
 <div class="alert alert-success">

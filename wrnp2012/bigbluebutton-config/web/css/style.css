@@ -99,7 +99,10 @@ html[xmlns] .clearfix {
 #about {
   clear: both;
   text-align: justify;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  padding-top: 15px;
+  border-top: 1px solid #ddd;
+  box-shadow: inset 0px 1px 1px #fff;
 }
 
 #join {
@@ -120,6 +123,12 @@ html[xmlns] .clearfix {
 }
 
 #form-join {
+}
+
+#join-and-recording {
+  padding-top: 25px;
+  border-top: 1px solid #ddd;
+  box-shadow: inset 0px 1px 1px #fff;
 }
 
 #feedback {

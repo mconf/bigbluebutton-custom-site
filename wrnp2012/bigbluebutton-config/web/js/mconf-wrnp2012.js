@@ -9,4 +9,16 @@ $(document).ready(function() {
   });
   $("#role").trigger("change");
 
+  $("#join-submit").on("click", function(e) {
+    e.preventDefault();
+    $("#mobile").val(0);
+    $(this).parent().submit();
+  });
+
+  $("#join-submit-mobile").on("click", function(e) {
+    e.preventDefault();
+    $("#mobile").val(1);
+    $(this).parent().submit();
+  });
+
 });

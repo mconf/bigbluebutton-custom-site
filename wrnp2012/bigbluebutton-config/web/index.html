@@ -41,8 +41,6 @@
       XIII Workshop da Rede Nacional de Ensino e Pesquisa (WRNP)
     </span></div>
 
-    <img class="divider" src="images/divider.png"/>
-
     <div id="welcome">
       <p class="content">
         O <a href="http://wrnp.rnp.br/">WRNP</a> (Workshop da <a href="http://www.rnp.br/">Rede Nacional de Ensino e Pesquisa)</a> de 2012 acontece de 30 de abril à 1 de maio em Ouro Preto (MG), durante o <a href="http://sbrc2012.dcc.ufmg.br/xiii-workshop-da-rede-nacional-de-ensino-e-pesquisa-wrnp?m=1004">SBRC 2012</a>.
@@ -66,39 +64,39 @@
       </p>
     </div>
 
-    <img class="divider" src="images/divider.png"/>
+    <div id="join-and-recording" class="clearfix">
 
-    <div class="clearfix">
+      <div id="feedback" class="alert alert-success clearfix">
+        Você já participou da transmissão do WRNP 2012? <a href="https://docs.google.com/spreadsheet/viewform?formkey=dDRSYUFBUmZocEtscnhkUzB6VzNNVkE6MA#gid=0">Clique aqui</a> para avaliar a experiência de ter acompanhando a transmissão via Mconf.
+      </div>
 
-    <div id="feedback" class="alert alert-success clearfix">
-      Você já participou da transmissão do WRNP 2012? <a href="https://docs.google.com/spreadsheet/viewform?formkey=dDRSYUFBUmZocEtscnhkUzB6VzNNVkE6MA#gid=0">Clique aqui</a> para avaliar a experiência de ter acompanhando a transmissão via Mconf.
-    </div>
+      <div id="join" class="clearfix">
+        <h2>Acesse a transmissão ao vivo:</h2>
+        <form id="form-join" NAME="form1" METHOD="GET" action="/demo/wrnp2012.jsp">
+          <label for="username">Seu nome:</label>
+          <input type="text" id="username" required="required" autofocus="autofocus" name="username" />
+          <label for="role">Entrar como:</label>
+          <select id="role" required="required" name="role">
+            <option value="attendee">Participante</option>
+            <option value="moderator">Moderador</option>
+          </select>
+          <label></label>
+          <input type="password" id="password" name="password" placeholder="Digite a senha" />
+          <label></label>
+          <input id="join-submit" type="submit" value="Entrar" class="btn btn-primary" />
+          <input type="hidden" id="mobile" name="mobile" value="0" />
+          <input id="join-submit-mobile" type="submit" value="Entrar com Android" class="btn" />
+        </form>
+      </div>
 
-    <div id="join" class="clearfix">
-      <h2>Acesse a transmissão ao vivo:</h2>
-      <form id="form-join" NAME="form1" METHOD="GET" onSubmit="return checkform(this);" action="/demo/wrnp2012.jsp">
-        <label for="username">Seu nome:</label>
-        <input type="text" id="username" required="required" autofocus="autofocus" name="username" />
-        <label for="role">Entrar como:</label>
-        <select id="role" required="required" name="role">
-          <option value="attendee">Participante</option>
-          <option value="moderator">Moderador</option>
-        </select>
-        <label></label>
-        <input type="password" id="password" name="password" placeholder="Digite a senha" />
-        <label></label>
-        <input type="submit" value="Entrar" class="btn" />
-      </form>
-    </div>
-
-    <div id="recordings" class="clearfix">
-      <h2>Assista às gravações:</h2>
-      Não há gravações disponíveis no momento.
-      <!--<ul>
-        <li><a href="#">Dia 02/05/2012: Sessão manhã</a></li>
-        <li><a href="#">Dia 02/05/2012: Sessão tarde</a></li>
-      </ul>-->
-    </div>
+      <div id="recordings" class="clearfix">
+        <h2>Assista às gravações:</h2>
+        Não há gravações disponíveis no momento.
+        <!--<ul>
+          <li><a href="#">Dia 02/05/2012: Sessão manhã</a></li>
+          <li><a href="#">Dia 02/05/2012: Sessão tarde</a></li>
+        </ul>-->
+      </div>
 
     </div>
 
