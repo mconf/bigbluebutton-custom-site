@@ -131,13 +131,13 @@ public String createMeeting(String meetingID, String welcome, String moderatorPa
   <div class="navbar-inner">
     <div class="container">
       <div class="pull-left">
-        <a class="brand" href="http://mconf.org">Mconf.org</a>
+        <a class="brand" href="http://mconf.org/events">mconf.org</a>
       </div>
     </div>
   </div>
 </div>
 
-<div id="main"><div id="main_content" class="container">
+<div id="main"><div id="main_content" class="container" style="margin-top: 60px;">
 
 <%
   if (usersNow >= maxUsers && !userIsMod) {
@@ -146,7 +146,7 @@ public String createMeeting(String meetingID, String welcome, String moderatorPa
 <div class="alert alert-warning">
   Desculpe, o sistema alcançou o número máximo de usuários. Tente novamente mais tarde.
 </div>
-<a href="/">Voltar...</a>
+<a href="javascript: history.back()">Voltar...</a>
 
 
 <%
@@ -157,7 +157,7 @@ public String createMeeting(String meetingID, String welcome, String moderatorPa
 <div class="alert alert-error">
   Senha de moderador inválida.
 </div>
-<a href="/">Voltar...</a>
+<a href="javascript: history.back()">Voltar...</a>
 
 <%
   // user invalid == wrong moderator password
@@ -167,7 +167,7 @@ public String createMeeting(String meetingID, String welcome, String moderatorPa
 <div class="alert alert-error">
   Você precisa especificar o seu nome para entrar na sessão.
 </div>
-<a href="/">Voltar...</a>
+<a href="javascript: history.back()">Voltar...</a>
 
 <%
   } else {
@@ -180,7 +180,7 @@ public String createMeeting(String meetingID, String welcome, String moderatorPa
 <div class="alert alert-warning">
   A sessão ainda não foi iniciada. Por favor espere o moderador iniciar a sessão e tente novamente.
 </div>
-<a href="/">Voltar...</a>
+<a href="javascript: history.back()">Voltar...</a>
 
 <%
         return;
@@ -195,7 +195,7 @@ public String createMeeting(String meetingID, String welcome, String moderatorPa
 <div class="alert alert-warning">
   Não foi possível abrir a sala. Por favor, contate o administrador.
 </div>
-<a href="/">Voltar...</a>
+<a href="javascript: history.back()">Voltar...</a>
 
 <%
         return;
@@ -227,7 +227,7 @@ Se você não for redirecionado, <a href="<%=joinURL%>">clique aqui</a> para ent
 <div class="alert alert-error">
   URL inválida. Verifique seus dados de entrada.
 </div>
-<a href="/">Voltar...</a>
+<a href="javascript: history.back()">Voltar...</a>
 
 <%
     }
