@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sudo cp -r ./* /var/www/bigbluebutton-default/recordings/
+sudo cp -r * /var/www/bigbluebutton-default/recordings/
