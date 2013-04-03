@@ -112,8 +112,8 @@ html[xmlns] .clearfix {
 
 #recordings {
   text-align: left;
-  width: 430px;
-  float: right;
+  /*width: 430px;
+  float: right;*/
 }
 
 
